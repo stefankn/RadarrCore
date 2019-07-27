@@ -15,6 +15,7 @@ public struct RCMovie: Decodable, Hashable, Equatable, CustomStringConvertible {
     public let imdbId: String?
     public let title: String
     public let titleSlug: String
+    public let sortTitle: String
     public let overview: String?
     public let year: Int
     public let status: RCMovieStatus?
@@ -23,6 +24,7 @@ public struct RCMovie: Decodable, Hashable, Equatable, CustomStringConvertible {
     public let qualityProfileId: Int
     public let tmdbId: Int
     public let images: [RCImage]
+    public let added: String
 
     public var poster: URL? { imageURL(for: .poster) }
     public var fanart: URL? { imageURL(for: .fanart) }
@@ -61,6 +63,12 @@ public struct RCMovie: Decodable, Hashable, Equatable, CustomStringConvertible {
         } else {
             return nil
         }
+    }
+    
+    public var addedDate: Date {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withFullTime, .withFullDate, .withFractionalSeconds]
+        return formatter.date(from: added) ?? Date()
     }
     
     

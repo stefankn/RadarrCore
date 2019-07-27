@@ -79,7 +79,13 @@ public struct RCMovie: Decodable, Hashable, Equatable, CustomStringConvertible {
     }
     
     
+    
     // MARK: - Functions
+    
+    public func delete(completion: @escaping (Result<[String: String], Error>) -> Void) {
+        RCService(server: RCManager.shared.server.value)?.send(RCDeleteMovie(id: id), completion: completion)
+    }
+    
     
     // MARK: Equatable Functions
     

@@ -10,4 +10,5 @@ import Foundation
 public enum RCHTTPMethod: String {
     case get = "GET"
     case post = "POST"
+    case delete = "DELETE"
 }

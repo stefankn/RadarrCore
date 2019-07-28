@@ -25,6 +25,7 @@ public struct RCMovie: Decodable, Hashable, Equatable, CustomStringConvertible {
     public let tmdbId: Int
     public let images: [RCImage]
     public let added: String
+    public let youTubeTrailerId: String?
 
     public var poster: URL? { imageURL(for: .poster) }
     public var fanart: URL? { imageURL(for: .fanart) }
@@ -63,6 +64,14 @@ public struct RCMovie: Decodable, Hashable, Equatable, CustomStringConvertible {
         } else {
             return nil
         }
+    }
+    
+    public var trailer: String? {
+        if let trailerId = youTubeTrailerId {
+            return "https://www.youtube.com/watch?v=\(trailerId)"
+        }
+        
+        return nil
     }
     
     public var addedDate: Date {

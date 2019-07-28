@@ -74,6 +74,22 @@ public struct RCMovie: Decodable, Hashable, Equatable, CustomStringConvertible {
         return nil
     }
     
+    public var trailerURL: URL? {
+        if let trailer = trailer {
+            return URL(string: trailer)
+        } else {
+            return nil
+        }
+    }
+    
+    public var youtubeURL: URL? {
+        if let trailerId = youTubeTrailerId {
+            return URL(string: "youtube://\(trailerId)")
+        } else {
+            return nil
+        }
+    }
+    
     public var addedDate: Date {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withFullTime, .withFullDate, .withFractionalSeconds]

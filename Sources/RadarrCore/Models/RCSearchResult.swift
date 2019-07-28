@@ -21,7 +21,7 @@ public struct RCSearchResult: Decodable, Hashable {
     public let downloaded: Bool
     public let isAvailable: Bool
     
-    public var poster: URL? { imageURL(for: .poster) }
+    public var poster: String? { imagePath(for: .poster) }
     
     public var statusDescription: String? {
         if downloaded {
@@ -47,14 +47,7 @@ public struct RCSearchResult: Decodable, Hashable {
     
     // MARK: - Private Functions
         
-    private func imageURL(for type: RCImageType) -> URL? {
-        if
-            let server = RCManager.shared.server.value,
-            let image = images.filter({ $0.coverType == type }).first {
-            
-            return URL(string: image.url, relativeTo: server.url)
-        } else {
-            return nil
-        }
+    private func imagePath(for type: RCImageType) -> String? {
+        return images.filter({ $0.coverType == type }).first?.url
     }
 }

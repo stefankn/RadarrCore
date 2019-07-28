@@ -23,4 +23,13 @@ public struct RCServer: Codable {
         
         return URL(string: "http://\(host)/")
     }
+    
+    
+    
+    // MARK: - Construction
+    
+    public init(host: String, apikey: String) {
+        self.host = host
+        self.apikey = apikey
+    }
 }

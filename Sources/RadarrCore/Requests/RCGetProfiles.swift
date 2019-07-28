@@ -20,4 +20,10 @@ public struct RCGetProfiles: RCRequest {
     // MARK: RCRequest Properties
     
     public var endpoint: String { "api/profile" }
+    
+    
+    
+    // MARK: - Construction
+    
+    public init() {}
 }

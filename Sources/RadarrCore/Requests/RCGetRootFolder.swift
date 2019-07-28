@@ -20,4 +20,10 @@ public struct RCGetRootFolder: RCRequest {
     // MARK: RCRequest Properties
     
     public var endpoint: String { "api/rootfolder" }
+    
+    
+    
+    // MARK: - Construction
+    
+    public init() {}
 }

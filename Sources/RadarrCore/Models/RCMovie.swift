@@ -27,8 +27,8 @@ public struct RCMovie: Decodable, Hashable, Equatable, CustomStringConvertible {
     public let added: String
     public let youTubeTrailerId: String?
 
-    public var poster: URL? { imageURL(for: .poster) }
-    public var fanart: URL? { imageURL(for: .fanart) }
+    public var poster: String? { imagePath(for: .poster) }
+    public var fanart: String? { imagePath(for: .fanart) }
     
     public var isPending: Bool {
         return status == .tba
@@ -52,10 +52,6 @@ public struct RCMovie: Decodable, Hashable, Equatable, CustomStringConvertible {
         } else {
             return UIColor(red: 0.071, green: 0.427, blue: 0.757, alpha: 1.0)
         }
-    }
-    
-    public var profile: RCProfile? {
-        return RCManager.shared.profile(for: qualityProfileId)
     }
     
     public var imdbURL: URL? {
@@ -107,11 +103,6 @@ public struct RCMovie: Decodable, Hashable, Equatable, CustomStringConvertible {
     
     // MARK: - Functions
     
-    public func delete(completion: @escaping (Result<[String: String], Error>) -> Void) {
-        RCService(server: RCManager.shared.server.value)?.send(RCDeleteMovie(id: id), completion: completion)
-    }
-    
-    
     // MARK: Equatable Functions
     
     public static func == (lhs: Self, rhs: Self) -> Bool {
@@ -122,14 +113,7 @@ public struct RCMovie: Decodable, Hashable, Equatable, CustomStringConvertible {
     
     // MARK: - Private Functions
     
-    private func imageURL(for type: RCImageType) -> URL? {
-        if
-            let server = RCManager.shared.server.value,
-            let image = images.filter({ $0.coverType == type }).first {
-            
-            return URL(string: image.url, relativeTo: server.url)
-        } else {
-            return nil
-        }
+    private func imagePath(for type: RCImageType) -> String? {
+        return images.filter({ $0.coverType == type }).first?.url
     }
 }

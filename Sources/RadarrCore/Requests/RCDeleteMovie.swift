@@ -24,4 +24,12 @@ public struct RCDeleteMovie: RCRequest {
     
     public var endpoint: String { "api/movie/\(id)" }
     public var httpMethod: RCHTTPMethod { .delete }
+    
+    
+    
+    // MARK: - Construction
+    
+    public init(id: Int) {
+        self.id = id
+    }
 }

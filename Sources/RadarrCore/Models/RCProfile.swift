@@ -11,6 +11,6 @@ public struct RCProfile: Decodable, Hashable {
     
     // MARK: - Properties
     
-    let id: Int
+    public let id: Int
     public let name: String
 }

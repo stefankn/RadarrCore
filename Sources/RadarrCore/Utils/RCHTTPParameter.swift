@@ -9,6 +9,7 @@ import Foundation
 
 enum RCHTTPParameter: Decodable, CustomStringConvertible {
     case string(String)
+    case int(Int)
  
     
     
@@ -20,6 +21,8 @@ enum RCHTTPParameter: Decodable, CustomStringConvertible {
         switch self {
         case .string(let string):
             return string
+        case .int(let integer):
+            return String(describing: integer)
         }
     }
     
@@ -31,6 +34,8 @@ enum RCHTTPParameter: Decodable, CustomStringConvertible {
         let container = try decoder.singleValueContainer()
         if let string = try? container.decode(String.self) {
             self = .string(string)
+        } else if let int = try? container.decode(Int.self) {
+            self = .int(int)
         } else {
             throw DecodingError.dataCorruptedError(
                 in: container,

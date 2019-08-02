@@ -11,7 +11,7 @@ public struct RCGetWanted: RCRequest {
     
     // MARK: - Types
     
-    public typealias Response = [RCMovie]
+    public typealias Response = RCWanted
     
     
     
@@ -24,4 +24,20 @@ public struct RCGetWanted: RCRequest {
     // MARK: RCRequest Properties
     
     public var endpoint: String { "api/wanted/missing" }
+    
+    
+    
+    // MARK: - Private Properties
+    
+    private let sortKey = "title"
+    private let sortDirection = "ascending"
+    
+    
+    
+    // MARK: - Construction
+    
+    public init(page: Int, pageSize: Int) {
+        self.page = page
+        self.pageSize = pageSize
+    }
 }

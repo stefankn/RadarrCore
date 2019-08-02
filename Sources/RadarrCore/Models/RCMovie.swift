@@ -26,6 +26,8 @@ public struct RCMovie: Decodable, Hashable, Equatable, CustomStringConvertible {
     public let images: [RCImage]
     public let added: String
     public let youTubeTrailerId: String?
+    public let physicalRelease: String?
+    public let inCinemas: String?
 
     public var poster: String? { imagePath(for: .poster) }
     public var fanart: String? { imagePath(for: .fanart) }
@@ -34,7 +36,11 @@ public struct RCMovie: Decodable, Hashable, Equatable, CustomStringConvertible {
         return status == .tba
     }
     
-    public var statusDescription: String? {
+    public var releaseStatus: String? {
+        return status?.statusDescription
+    }
+    
+    public var downloadStatus: String? {
         if downloaded {
             return NSLocalizedString("Downloaded", comment: "Downloaded")
         } else if isAvailable == true {
@@ -87,9 +93,15 @@ public struct RCMovie: Decodable, Hashable, Equatable, CustomStringConvertible {
     }
     
     public var addedDate: Date {
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withFullTime, .withFullDate, .withFractionalSeconds]
-        return formatter.date(from: added) ?? Date()
+        return formatDate(from: added, options: [.withFullDate, .withFullTime, .withFractionalSeconds]) ?? Date()
+    }
+    
+    public var dateInCinemas: Date? {
+        return formatDate(from: inCinemas)
+    }
+    
+    public var physicalReleaseDate: Date? {
+        return formatDate(from: physicalRelease)
     }
     
     
@@ -115,5 +127,13 @@ public struct RCMovie: Decodable, Hashable, Equatable, CustomStringConvertible {
     
     private func imagePath(for type: RCImageType) -> String? {
         return images.filter({ $0.coverType == type }).first?.url
+    }
+    
+    private func formatDate(from string: String?, options: ISO8601DateFormatter.Options = [.withFullDate, .withFullTime]) -> Date? {
+        guard let string = string else { return nil }
+        
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = options
+        return formatter.date(from: string)
     }
 }

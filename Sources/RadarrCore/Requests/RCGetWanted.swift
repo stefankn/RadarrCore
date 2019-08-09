@@ -29,8 +29,8 @@ public struct RCGetWanted: RCRequest {
     
     // MARK: - Private Properties
     
-    private let sortKey = "title"
-    private let sortDirection = "ascending"
+    private let sortKey = "physicalRelease"
+    private let sortDirection = "descending"
     
     
     

@@ -18,6 +18,7 @@ public struct RCDeleteMovie: RCRequest {
     // MARK: - Properties
     
     let id: Int
+    let deleteFiles: Bool
     
     
     // MARK: RCRequest Properties
@@ -29,7 +30,8 @@ public struct RCDeleteMovie: RCRequest {
     
     // MARK: - Construction
     
-    public init(id: Int) {
+    public init(id: Int, deleteFiles: Bool) {
         self.id = id
+        self.deleteFiles = deleteFiles
     }
 }

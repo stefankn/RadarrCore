@@ -24,20 +24,23 @@ public struct RCCalendarDates: Decodable {
         if let movies = try? container.decode([RCMovie].self) {
             
             movies.forEach { movie in
+                
                 if let cinemaDate = movie.dateInCinemas {
-                    if !moviesInCalendar.keys.contains(cinemaDate) {
-                        moviesInCalendar[cinemaDate] = []
+                    let dateKey = Calendar.current.startOfDay(for: cinemaDate)
+                    if !moviesInCalendar.keys.contains(dateKey) {
+                        moviesInCalendar[dateKey] = []
                     }
                     
-                    moviesInCalendar[cinemaDate]?.append(movie)
+                    moviesInCalendar[dateKey]?.append(movie)
                 }
                 
                 if let physicalDate = movie.physicalReleaseDate {
-                    if !moviesInCalendar.keys.contains(physicalDate) {
-                        moviesInCalendar[physicalDate] = []
+                    let dateKey = Calendar.current.startOfDay(for: physicalDate)
+                    if !moviesInCalendar.keys.contains(dateKey) {
+                        moviesInCalendar[dateKey] = []
                     }
                     
-                    moviesInCalendar[physicalDate]?.append(movie)
+                    moviesInCalendar[dateKey]?.append(movie)
                 }
             }
         }

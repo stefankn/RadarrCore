@@ -5,7 +5,7 @@
 //  Created by Stefan Klein Nulent on 19/07/2019.
 //
 
-import UIKit
+import Foundation
 
 public enum RCMovieStatus: String, Decodable {
     case announced = "announced"

@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  RCGetMovies.swift
 //  
 //
 //  Created by Stefan Klein Nulent on 13/07/2019.

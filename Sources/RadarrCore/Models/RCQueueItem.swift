@@ -18,7 +18,7 @@ public struct RCQueueItem: Decodable, Hashable {
     public let title: String
     public let timeleft: String?
     public let estimatedCompletionTime: String?
-    public let status: String
+    public let status: RCQueueItemStatus
     
     public var progress: Float {
         return Float(size - sizeleft) / Float(size)

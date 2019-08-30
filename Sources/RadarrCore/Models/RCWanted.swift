@@ -9,6 +9,8 @@ import Foundation
 
 public struct RCWanted: Decodable {
     
+    // MARK: - Properties
+    
     public let page: Int
     public let pageSize: Int
     public let records: [RCMovie]

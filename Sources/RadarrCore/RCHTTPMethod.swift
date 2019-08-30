@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  RCHTTPMethod.swift
 //  
 //
 //  Created by Stefan Klein Nulent on 12/07/2019.

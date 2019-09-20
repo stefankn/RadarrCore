@@ -20,28 +20,26 @@ public struct CalendarDates: Decodable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         var moviesInCalendar: [Date: [Movie]] = [:]
+        let movies = try container.decode([Movie].self)
         
-        if let movies = try? container.decode([Movie].self) {
+        movies.forEach { movie in
             
-            movies.forEach { movie in
-                
-                if let cinemaDate = movie.dateInCinemas {
-                    let dateKey = Foundation.Calendar.current.startOfDay(for: cinemaDate)
-                    if !moviesInCalendar.keys.contains(dateKey) {
-                        moviesInCalendar[dateKey] = []
-                    }
-                    
-                    moviesInCalendar[dateKey]?.append(movie)
+            if let cinemaDate = movie.dateInCinemas {
+                let dateKey = Calendar.current.startOfDay(for: cinemaDate)
+                if !moviesInCalendar.keys.contains(dateKey) {
+                    moviesInCalendar[dateKey] = []
                 }
                 
-                if let physicalDate = movie.physicalReleaseDate {
-                    let dateKey = Foundation.Calendar.current.startOfDay(for: physicalDate)
-                    if !moviesInCalendar.keys.contains(dateKey) {
-                        moviesInCalendar[dateKey] = []
-                    }
-                    
-                    moviesInCalendar[dateKey]?.append(movie)
+                moviesInCalendar[dateKey]?.append(movie)
+            }
+            
+            if let physicalDate = movie.physicalReleaseDate {
+                let dateKey = Calendar.current.startOfDay(for: physicalDate)
+                if !moviesInCalendar.keys.contains(dateKey) {
+                    moviesInCalendar[dateKey] = []
                 }
+                
+                moviesInCalendar[dateKey]?.append(movie)
             }
         }
         

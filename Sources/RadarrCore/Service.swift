@@ -18,7 +18,6 @@ public final class Service {
     // MARK: - Private Properties
     
     private let server: Server
-    private let session = URLSession(configuration: .default)
     
     
     
@@ -50,7 +49,8 @@ public final class Service {
         
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.setValue(server.apikey, forHTTPHeaderField: "X-Api-Key")
-
+        
+        let session = URLSession(configuration: .default)
         let task = session.dataTask(with: urlRequest) { data, response, error in
             if let error = error {
                 completion(.failure(error))

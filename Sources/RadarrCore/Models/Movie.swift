@@ -21,6 +21,7 @@ public struct Movie: Decodable, Hashable, Equatable, CustomStringConvertible {
     public let status: MovieStatus?
     public let downloaded: Bool
     public let isAvailable: Bool?
+    public let hasFile: Bool
     public let qualityProfileId: Int
     public let tmdbId: Int
     public let images: [Image]

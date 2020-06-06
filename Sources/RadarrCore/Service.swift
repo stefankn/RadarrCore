@@ -77,7 +77,7 @@ public final class Service {
         }
         
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
-        if request.httpMethod == .get, let queryItems = try? URLQueryItemEncoder.encode(request), !queryItems.isEmpty {
+        if (request.httpMethod == .get || request.httpMethod == .delete), let queryItems = try? URLQueryItemEncoder.encode(request), !queryItems.isEmpty {
             components?.queryItems = queryItems
         }
         

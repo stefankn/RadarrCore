@@ -11,17 +11,18 @@ public struct SearchResult: Decodable, Hashable {
 
     // MARK: - Properties
     
-    let tmdbId: Int
-    let titleSlug: String
-    let images: [Image]
+    public let tmdbId: Int
     public let title: String
     public let year: Int
     public let overview: String?
     public let status: MovieStatus?
     public let downloaded: Bool
     public let isAvailable: Bool
-    
+
     public var poster: String? { imagePath(for: .poster) }
+    
+    let titleSlug: String
+    let images: [Image]
     
     
     
